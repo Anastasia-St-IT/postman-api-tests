@@ -1,0 +1,1228 @@
+{
+	"info": {
+		"_postman_id": "5dd7007b-ae75-4d6d-85d2-0ecf62908252",
+		"name": "SampleAPI_Tests",
+		"schema": "https://schema.getpostman.com/json/collection/vx.x.x/collection.json"
+	},
+	"item": [
+		{
+			"name": "Регистрация",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"{{$randomEmail}}\",\n  \"password\": \"{{$randomPassword}}\",\n  \"name\": \"{{$randomFirstName}}\",\n  \"phone\": \"+7912333333333\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/accounts/signup",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"accounts",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Подтверждение регистрации",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/accounts/confirm/{token}/",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"accounts",
+						"confirm",
+						"{token}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Логин",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });\r",
+							"pm.test(\"Cache-Control is present\", function () {\r",
+							"    pm.response.to.have.header(\"Cache-Control\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"sss3@gmail.com\",\n  \"password\": \"sss333www\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/accounts/login",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"accounts",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Проверка cуществования почты",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parameter exists true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.exists).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/accounts/exists?email=CCC333@gmail.com",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"accounts",
+						"exists"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "string",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "M",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "CCC333@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Информация для главной страницы",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/home/",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"home",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Информация для пользователя user_id, user_email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Save user_id\", function () {\r",
+							"    //otvet v formate json\r",
+							"    var jsonData = pm.response.json();\r",
+							"    //sohranjaem v user id\r",
+							"    var responseId = jsonData.user.id;\r",
+							"pm.environment.set(\"user_id\", responseId);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Save email to environment variable\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var jsonEmail = jsonData.user.email;\r",
+							"pm.environment.set(\"user_email\", jsonEmail);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/initial/",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"initial",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Данные пользователя Check email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Json value check\", function () {\r",
+							"    //sohranjaem telo otveta v json\r",
+							"    var jsonData = pm.response.json();\r",
+							"    //otobrazhaem v konsole\r",
+							"    console.log(jsonData)\r",
+							"    //sravnivaen znachenie email parametra s ozhidaemym rezultatom\r",
+							"    pm.expect(jsonData.email).to.eql(\"XXX@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check email\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(pm.environment.get(\"user_email\"));;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/{{user_id}}/",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Редактирование данных без name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(jsonData)\r",
+							"    pm.expect(jsonData.code).to.eql(\"validation_failed\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							" \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \r\n  \"gender\": \"woman\",\r\n  \"birthday\": \"1988-02-09\",\r\n  \"phone\": \"89121111111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/edit_profile",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"edit_profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Загрузка нового фото профиля",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "CCC333@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/C:/Users/xxx/Desktop/Rosa_Red_Chateau01.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/upload_avatar",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"upload_avatar"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Очистка фото профиля",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "CCC333@gmail.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/remove_avatar",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"remove_avatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение полного списка городов",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/initial/cities/",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"initial",
+						"cities",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Смена города positive Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cityId\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/change_city",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"change_city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Смена города negative Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cityId\": 8\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/change_city",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"change_city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Редактирование профиля своего пользователя positive Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Melanie\",\r\n  \"gender\": \"woman\",\r\n  \"birthday\": \"1983-12-09\",\r\n  \"phone\": \"89123333333\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/edit_profile",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"edit_profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Редактирование профиля своего пользователя negative Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": Melanie,\r\n  \"gender\": \"woman\",\r\n  \"birthday\": \"1983-08-09\",\r\n  \"phone\": \"891233333333\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/edit_profile",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"edit_profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Заявка на сотрудничество positive Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Content-Length is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Length\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"emailOrPhone\": \"CCC333@gmail.com\",\r\n  \"name\": \"Anastasia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/callbacks/cooperation/",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"callbacks",
+						"cooperation",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Заявка на сотрудничество negative Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"emailOrPhone\": \"CCC333@gmail.com\"\r\n  \"name\": \"Anastasia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/callbacks/cooperation/",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"callbacks",
+						"cooperation",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение списка предстоящих игр пользователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://frontend.example.ru/api/users/13877/future_events/",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"13x7",
+						"future_events",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Логаут",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YYY#",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Mustername",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://frontend.example.ru/api/accounts/logout?email=XXX@gmail.com&password=2XX17",
+					"protocol": "https",
+					"host": [
+						"frontend",
+						"example",
+						"ru"
+					],
+					"path": [
+						"api",
+						"accounts",
+						"logout"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "XXX@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "2XX17"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
